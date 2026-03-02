@@ -30,13 +30,30 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ content }) => 
           strong: (props: any) => <strong className="font-semibold text-neutral-900" {...props} />,
           em: (props: any) => <em className="italic text-neutral-700" {...props} />,
           img: (props: any) => {
-            const { src, alt, ...rest } = props;
+            const { src, alt, title, ...rest } = props;
+            console.log('Imagem detectada:', { src, alt, title });
             // Se src estiver vazio ou undefined, não renderizar
             if (!src) {
+              console.warn('Imagem sem src detectada');
               return null;
             }
-            const altFinal = alt || src?.split('/').pop()?.split('.')[0] || 'Imagem';
-            return <img src={src} alt={altFinal} className="max-w-full h-auto rounded-lg my-4 border border-neutral-200" {...rest} />;
+            // Para base64, usar alt customizado ou 'Imagem'
+            // Para URLs, extrair o nome do arquivo como alt
+            let altFinal = alt;
+            if (!altFinal) {
+              if (src.startsWith('data:')) {
+                altFinal = 'Imagem';
+              } else {
+                altFinal = src?.split('/').pop()?.split('.')[0] || 'Imagem';
+              }
+            }
+            console.log('Renderizando imagem:', { src: src.substring(0, 50), alt: altFinal });
+            return (
+              <figure className="my-4 flex flex-col items-center">
+                <img src={src} alt={altFinal} className="max-w-full h-auto min-h-[100px] rounded-lg border border-neutral-200 shadow-sm" {...rest} />
+                {alt && <figcaption className="text-sm text-neutral-500 mt-2 text-center">{alt}</figcaption>}
+              </figure>
+            );
           },
           code: (props: any) => {
             const { className, children, ...rest } = props as any;
