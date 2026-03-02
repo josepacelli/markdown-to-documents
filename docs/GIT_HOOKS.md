@@ -122,7 +122,7 @@ FAIL  __tests__/lib/store.test.ts
 
 Hook principal que executa as verificações:
 
-```bash
+````bash
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
@@ -171,8 +171,9 @@ if ! npm run build; then
 fi
 
 echo "✅ Build passou. Push permitido."
-```
-```
+````
+
+````
 
 ### `package.json` Scripts Relacionados
 
@@ -191,7 +192,7 @@ echo "✅ Build passou. Push permitido."
     "prepare": "husky install"
   }
 }
-```
+````
 
 ## ⚙️ Customização
 
