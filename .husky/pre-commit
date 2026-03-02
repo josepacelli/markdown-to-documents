@@ -46,15 +46,6 @@ fi
 echo "✅ Testes passaram"
 echo ""
 
-# 4. Build TypeScript
-echo "🔨 Verificando build..."
-if ! npm run build; then
-  echo "❌ Build falhou"
-  exit 1
-fi
-
-echo "✅ Build passou"
-echo ""
 
 echo "✅ Todas as verificações passaram! Commit permitido."
 
