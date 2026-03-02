@@ -1,0 +1,12 @@
+echo "🔍 Executando verificações pre-push..."
+echo ""
+
+# 1. Rodar build antes do push para garantir que a aplicação builda corretamente
+echo "🔨 Executando build (pre-push)..."
+if ! npm run build; then
+  echo "❌ Build falhou. Push cancelado. Execute 'npm run build' localmente para depurar."
+  exit 1
+fi
+
+echo "✅ Build passou. Push permitido."
+

@@ -46,6 +46,8 @@ fi
 echo "✅ Testes passaram"
 echo ""
 
-
+# Nota: O "build" foi movido para o hook `pre-push` para evitar builds longos no pre-commit.
+echo "ℹ️  Nota: 'build' foi movido para o hook pre-push (não executado no pre-commit)."
+echo ""
 echo "✅ Todas as verificações passaram! Commit permitido."
 

@@ -149,14 +149,29 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# 4. Build
-npm run build
-if [ $? -ne 0 ]; then
-  echo "❌ Build falhou"
+# Nota: o passo de 'build' foi movido para o hook `pre-push` para evitar builds longos durante o pre-commit.
+# Para garantir que o código ainda builda antes de ser enviado, usamos um hook `pre-push`.
+
+### `.husky/pre-push`
+
+Hook que executa o build antes de permitir o push:
+
+```bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Executando verificações pre-push..."
+echo ""
+
+# Rodar build antes do push para garantir que a aplicação builda corretamente
+echo "🔨 Executando build (pre-push)..."
+if ! npm run build; then
+  echo "❌ Build falhou. Push cancelado. Execute 'npm run build' localmente para depurar."
   exit 1
 fi
 
-echo "✅ Todas as verificações passaram! Commit permitido."
+echo "✅ Build passou. Push permitido."
+```
 ```
 
 ### `package.json` Scripts Relacionados
