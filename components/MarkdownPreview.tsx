@@ -31,6 +31,10 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ content }) => 
           em: (props: any) => <em className="italic text-neutral-700" {...props} />,
           img: (props: any) => {
             const { src, alt, ...rest } = props;
+            // Se src estiver vazio ou undefined, não renderizar
+            if (!src) {
+              return null;
+            }
             const altFinal = alt || src?.split('/').pop()?.split('.')[0] || 'Imagem';
             return <img src={src} alt={altFinal} className="max-w-full h-auto rounded-lg my-4 border border-neutral-200" {...rest} />;
           },
