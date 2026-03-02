@@ -1,4 +1,4 @@
-import { VERSAO_APP, obterVersaoFormatada } from '@/lib/versao';
+import { obterVersaoFormatada, VERSAO_APP } from '@/lib/versao';
 
 describe('lib/versao.ts', () => {
   describe('VERSAO_APP', () => {
@@ -15,10 +15,10 @@ describe('lib/versao.ts', () => {
       expect(VERSAO_APP).toMatch(regex);
     });
 
-    it('deve ter valor padrão 1.0.35', () => {
-      // Se NEXT_PUBLIC_APP_VERSION não está definida, deve ser 1.0.35
+    it('deve ter valor padrão 1.0.40', () => {
+      // Se NEXT_PUBLIC_APP_VERSION não está definida, deve ser 1.0.40
       if (!process.env.NEXT_PUBLIC_APP_VERSION) {
-        expect(VERSAO_APP).toBe('1.0.35');
+        expect(VERSAO_APP).toBe('1.0.40');
       }
     });
   });

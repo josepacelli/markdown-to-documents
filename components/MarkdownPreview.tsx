@@ -29,6 +29,11 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ content }) => 
           p: (props: any) => <p className="text-neutral-600 leading-relaxed mb-4" {...props} />,
           strong: (props: any) => <strong className="font-semibold text-neutral-900" {...props} />,
           em: (props: any) => <em className="italic text-neutral-700" {...props} />,
+          img: (props: any) => {
+            const { src, alt, ...rest } = props;
+            const altFinal = alt || src?.split('/').pop()?.split('.')[0] || 'Imagem';
+            return <img src={src} alt={altFinal} className="max-w-full h-auto rounded-lg my-4 border border-neutral-200" {...rest} />;
+          },
           code: (props: any) => {
             const { className, children, ...rest } = props as any;
             const spreadProps = rest as React.HTMLAttributes<HTMLElement>;
